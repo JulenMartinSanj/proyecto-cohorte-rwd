@@ -1,0 +1,11 @@
+---
+title: "Análisis de Cohorte RWD"
+output: html_document
+---
+
+Este es nuestro informe automático. Aquí está la tabla basal calculada por nuestro pipeline:
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargamos la tabla sin tener que recalcular nada
+targets::tar_read(tabla_uno)
+```
+
