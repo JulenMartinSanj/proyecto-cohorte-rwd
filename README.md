@@ -1,9 +1,12 @@
-# Análisis Reproducible de RWD: Cohorte de Diabetes Tipo 2
+# Análisis Reproducible de RWD: Cohorte de Diabetes Tipo 2 e Imputación Múltiple + Modelado Predictivo
 
 Este proyecto demuestra la construcción de un pipeline de análisis de datos reproducible utilizando **Real World Data (RWD)** sintética (generada con Synthea). Simula el flujo de trabajo típico de un grupo de investigación epidemiológica, desde la ingesta de datos en crudo hasta la generación de un informe clínico.
 
-## 🎯 Objetivo
-Extraer una cohorte clínica de pacientes diagnosticados con Diabetes Tipo 2, vincular sus características demográficas con sus observaciones clínicas basales (HbA1c, IMC, Presión Arterial) en el momento del diagnóstico, y generar una Tabla 1 descriptiva.
+## 🎯 Objetivos
+- Extraer una cohorte clínica de pacientes diagnosticados con Diabetes Tipo 2, vincular sus características demográficas con sus observaciones clínicas basales (HbA1c, IMC, Presión Arterial) en el momento del diagnóstico, y generar una Tabla 1 descriptiva.
+
+- Analizar el patrón de los datos faltantes para evitar el sesgo de selección que supone eliminar pacientes con historial incompleto, y generar gráfico 1 descriptivo. Tras ello, aplicar Imputación Múltiple (MICE y entrenar una Regresión Logística y visualizar que variables basales predicen que el paciente debute con una HbA1c ≥ 6.5%.
+
 
 ## 🛠️ Herramientas y Metodología
 - **Lenguaje:** R
