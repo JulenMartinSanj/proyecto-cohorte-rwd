@@ -1,11 +1,13 @@
-# _targets.R
 library(targets)
-library(tarchetypes) # <-- AÑADIDO: paquete para funciones avanzadas como Quarto
+library(tarchetypes)
 
 source("R/funciones_datos.R")
 source("R/funciones_analisis.R")
+source("R/funciones_imputacion.R") 
+source("R/funciones_modelo.R") 
 
-tar_option_set(packages = c("tidyverse", "lubridate", "gtsummary"))
+# <-- NUEVO: Añadimos naniar y mice a la lista de paquetes
+tar_option_set(packages = c("tidyverse", "lubridate", "gtsummary", "naniar", "mice")) 
 
 list(
   tar_target(archivo_pacientes, "data/raw/patients.csv", format = "file"),
@@ -18,7 +20,11 @@ list(
   
   tar_target(tabla_uno, crear_tabla_uno(cohorte_final)),
   
-  # EL INFORME AUTOMÁTICO
-  # tar_render detecta qué objetos de targets se usan dentro del .rmd y crea las conexiones
+  tar_target(grafico_nas, explorar_datos_faltantes(cohorte_final)),
+  tar_target(cohorte_imputada, imputar_datos(cohorte_final)),
+  
+  # <-- NUEVO TARGET: El modelo predictivo usa la cohorte imputada, no la original
+  tar_target(modelo_riesgo, entrenar_modelo_logistico(cohorte_imputada)),
+  
   tar_render(informe_html, "reports/informe.Rmd")
 )

@@ -1,11 +1,38 @@
 ---
-title: "Análisis de Cohorte RWD"
-output: html_document
+title: "Proyecto 2: Imputación Múltiple y Modelado Predictivo"
+author: "Julen Martín"
+output: 
+  html_document:
+    theme: flatly
+    toc: yes
 ---
 
-Este es nuestro informe automático. Aquí está la tabla basal calculada por nuestro pipeline:
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-# Cargamos la tabla sin tener que recalcular nada
+## 1. Introducción
+
+Este informe presenta el análisis de una cohorte clínica sintética generada mediante Synthea. El objetivo principal es evaluar metodologías avanzadas de **Real World Data (RWD)**, incluyendo el manejo de datos faltantes mediante imputación múltiple y la creación de un modelo predictivo multivariante.
+
+---
+
+## 2. Características Basales (Datos Crudos)
+
+A continuación se muestra la cohorte original, evidenciando la presencia de valores perdidos (NAs) típicos en la práctica clínica real.
+
+```{r tabla1, echo=FALSE, message=FALSE, warning=FALSE}
 targets::tar_read(tabla_uno)
 ```
 
+Para evitar el sesgo de selección que supone eliminar pacientes con historial incompleto, analizamos el patrón de los datos faltantes antes de aplicar Imputación Múltiple (MICE).
+
+```{r tabla2, echo=FALSE, message=FALSE, warning=FALSE}
+targets::tar_read(grafico_nas)
+```
+
+Tras rellenar los huecos usando Imputación Múltiple por Ecuaciones Encadenadas (Predictive Mean Matching), entrenamos una Regresión Logística.
+
+**Pregunta Clínica: ¿Qué variables basales predicen que el paciente debute con una HbA1c ≥ 6.5%?**
+
+```{r tabla3, echo=FALSE, message=FALSE, warning=FALSE}
+targets::tar_read(modelo_riesgo)
+```
+
+Conclusión: Se observa una asociación estadísticamente significativa entre la **Presión Arterial Sistólica (PAS) elevada** y el riesgo de presentar una HbA1c ≥ 6.5% en el momento del diagnóstico.
